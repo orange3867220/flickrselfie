@@ -8,10 +8,12 @@
  * Controller of the flickrselfieApp
  */
 angular.module('flickrselfieApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('MainCtrl', ['$scope', 'flickrSearchService', 
+  	function ($scope, flickrSearchService) {
+
+
+    	flickrSearchService.search({tags: ['selfie', 'pretty'], page: 2})
+    		.success(function(data){
+    			console.log(data);
+    		});
+  }]);
