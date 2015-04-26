@@ -1,7 +1,7 @@
 <div class="header">
   <div class="col-md-3 pull-right">
-    <input class="align-right" type="text" ng-model="tags" ng-click="this.setSelectionRange(0, this.value.length);"/>
-    <button class="btn btn-success" ng-click="clearPhotos(); searchByTags();">Search</button>
+    <input id="search-input" class="align-right" type="text" ng-model="tags" />
+    <button class="btn btn-success" ng-click="clearPrevious(); searchByTags();">Search</button>
   </div>
 
   <h3 class="text-muted logo white-text">flickrselfie</h3>

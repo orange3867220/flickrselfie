@@ -39,21 +39,25 @@ angular.module('flickrselfieApp')
   		};
 
   		//
+  		// Function to clear previous search details
   		//
-  		//
-  		$scope.clearPhotos = function(){
+  		$scope.clearPrevious = function(){
   			$scope.photos = [];
+  			$scope.page = 1;
   		};
 
+  		//
+  		// Function to do search
+  		//
   		$scope.searchByTags = function(){
   			startLoading();
 
   			flickrSearchService.search({tags: $scope.tags, page: $scope.page})
   				.success(function(response){
   					//console.log(response);
-  					
-  					pushPhotos(response.photos.photo);
+
   					$scope.page = $scope.page+1;
+  					pushPhotos(response.photos.photo);
 
   					endLoading();
   				});	
@@ -62,10 +66,29 @@ angular.module('flickrselfieApp')
   		//
   		// Infinite scroll, when reach end of page, load more page
   		//
-		window.onscroll = function(ev) {
-			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+		window.onscroll = function(e){
+			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
 				$scope.loading = true;
 				$scope.searchByTags();
 			}
 		};
+
+		//
+		// Bind enter click event for quick trigger search
+		//
+		angular.element('#search-input').keyup(function(e){
+			if (e.keyCode === 13) {
+        		$scope.clearPrevious();
+        		$scope.searchByTags();
+			}
+		});
+
+		//
+		// Bind enter click for select all, improve UX
+		//
+		angular.element('#search-input').click(function(e){
+			this.setSelectionRange(0, this.value.length);
+		});
+
+
   }]);
