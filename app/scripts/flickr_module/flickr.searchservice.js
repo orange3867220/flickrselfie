@@ -40,7 +40,7 @@
   		//
   		this.search = function(params){
   			var url = this.parseSearchUrl(params);
-
+        console.log(url);
   			return $http.get(url)
   			 .success(function(data, status, headers, config){
   				  console.log(data);
