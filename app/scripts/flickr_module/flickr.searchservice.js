@@ -24,13 +24,13 @@
   			url += '&format=json';
         url += '&nojsoncallback=1';
 
-			// Loop through put parameters in
-			for (var key in params) {
-				if (params.hasOwnProperty(key)) {
-					var tar = params[key];
-					url += '&' + key + '=' + ( angular.isArray(tar) ? tar.join(',') : tar );
-				}
-			}
+  			// Loop through put parameters in
+  			for (var key in params) {
+  				if (params.hasOwnProperty(key)) {
+  					var tar = params[key];
+  					url += '&' + key + '=' + ( angular.isArray(tar) ? tar.join(',') : tar );
+  				}
+  			}
 
   			return url;
   		};

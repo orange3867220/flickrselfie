@@ -8,16 +8,19 @@
  * Controller of the flickrselfieApp
  */
 angular.module('flickrselfieApp')
-  .controller('MainCtrl', ['$scope', 'flickrSearchService', 
-  	function ($scope, flickrSearchService) {
+  .controller('MainCtrl', ['$scope', '$timeout', 'flickrSearchService', 
+  	function ($scope, $timeout, flickrSearchService) {
 
   		//
   		// Set up scope variables
   		//
+  		$scope.loading = false;
+  		$scope.smallWindow = false;
+
   		$scope.tags = '';
   		$scope.page = 1;
   		$scope.photos = [];
-  		$scope.loading = false;
+
 
   		//
   		// Private function to start & end loading
@@ -66,12 +69,12 @@ angular.module('flickrselfieApp')
   		//
   		// Infinite scroll, when reach end of page, load more page
   		//
-		window.onscroll = function(e){
-			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+		angular.element(window).scroll(function() {
+			if(angular.element(window).scrollTop() + angular.element(window).height() === angular.element(document).height()) {
 				$scope.loading = true;
 				$scope.searchByTags();
 			}
-		};
+		});
 
 		//
 		// Bind enter click event for quick trigger search
@@ -90,5 +93,40 @@ angular.module('flickrselfieApp')
 			this.setSelectionRange(0, this.value.length);
 		});
 
+		//
+		// Private function to detect window size
+		//
+		var isSmallDevice = function(){
+			if(Math.max(angular.element(window).width(), angular.element(document).width()) >= 768)
+				return false;
+			else
+				return true;
+		};
+		$scope.smallWindow = isSmallDevice();
 
+		//
+		// Functions to detect window resize 
+		// 				set proper image setting for display
+		//				clear timeout trash when destory
+		//
+		var resizeTimemout;
+		var clearTimeout = function(){
+			if (angular.isDefined(resizeTimemout)) {
+				$timeout.cancel(resizeTimemout);
+				resizeTimemout = undefined;
+			}
+		};
+		angular.element(window).resize(function() {
+			if(resizeTimemout) clearTimeout(resizeTimemout);
+				
+			resizeTimemout = $timeout(function() {
+				console.log('set window size');
+				$scope.smallWindow = isSmallDevice();
+				console.log($scope.smallWindow);
+			}, 500);
+		});
+		// Remove timeout if set
+		$scope.$on('$destory', function(){
+			clearTimeout(resizeTimemout);
+		});
   }]);

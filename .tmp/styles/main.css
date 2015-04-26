@@ -67,12 +67,41 @@ body {
   display: inline-block;
   margin: 10px;
   border: 1px solid #FFFFFF;
+  position: relative;
+}
+.photo-block p{
+  position: absolute; 
+  top: 50%;
+  left: 50%;
+  margin-top: -10px;
+  margin-left: -31px;
+  /*z-index: -1;*/
+}
+.photo-block img{
+  position: relative;
+  z-index: 2;
+}
+.photo-block-small{
+  width: 77px;
+  height: 77px;
+}
+.photo-block-small img{
+  width: 75px;
+  height: 75px;
+}
+.photo-block-big{
+  width: 152px;
+  height: 152px;
+}
+.photo-block-big img{
+  width: 150px;
+  height: 150px;
 }
 /*Spinner rotate*/
 .loading-block{
-  text-align:center; 
-  color:#DDDDDD; 
-  font-size:50px;
+  color: #DDDDDD; 
+  font-size: 50px;
+  text-align: center;
 }
 .glyphicon-refresh-animate {
     -animation: spin .8s infinite linear;

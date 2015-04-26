@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="col-md-3 pull-right">
+  <div class="col-md-4 pull-right">
     <input id="search-input" class="align-right" type="text" ng-model="tags" />
     <button class="btn btn-success" ng-click="clearPrevious(); searchByTags();">Search</button>
   </div>
@@ -12,8 +12,11 @@
   <h4 class="white-text center-text">Please input the tag you wish to search.</h4>
 </div>
 
-<div class="black-background">
-  <img ng-repeat="photo in photos" class="photo-block" style="width: 150px; height:150px;" src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>
+<div class="black-background center-text">
+  <div class="photo-block photo-block-{{smallWindow ? 'small' : 'big'}} white-text"  ng-repeat="photo in photos">
+    <p>Loading...</p>
+    <img src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>
+  </div>
 </div>
 
 <div class="loading-block black-background" ng-show="loading">
