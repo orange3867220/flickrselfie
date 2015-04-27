@@ -21,11 +21,19 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      "bower_components/jquery/dist/jquery.js",
       "bower_components/angular/angular.js",
       "bower_components/angular-mocks/angular-mocks.js",
       "bower_components/angular-animate/angular-animate.js",
       "bower_components/angular-route/angular-route.js",
-      "app/scripts/**/*.js",
+      //customize properly load sequence
+      "app/scripts/tags.js",
+      "app/scripts/flickr_module/flickr.js",
+      "app/scripts/flickr_module/flickr.searchservice.js",
+      "app/scripts/flickr_module/flickr.directive.js",
+      "app/scripts/app.js",
+      "app/scripts/controllers/main.js",
+      //"app/scripts/**/*.js",
       "test/mock/**/*.js",
       "test/spec/**/*.js"
     ],

@@ -6,7 +6,8 @@ angular.module('flickrApp').directive('flickrPhotos', function() {
 		restrict: 'E',
 
 		scope: {
-			tags: '='
+			tags: '=',
+			smalldevice: '='
 		},
 
 		controller: 'flickrPhotosCon',
@@ -17,11 +18,12 @@ angular.module('flickrApp').directive('flickrPhotos', function() {
 angular.module('flickrApp').controller('flickrPhotosCon', 
 	['$scope', 'flickrSearchService',
 	function($scope, flickrSearchService){
-		console.log($scope.tags);
+		//console.log($scope.tags);
 
 		$scope.loading = false;
 		$scope.page = 1;
   		$scope.photos = [];
+  		$scope.status = 'ok';
 
   		//
 	  	// Private function to start & end loading
@@ -56,11 +58,13 @@ angular.module('flickrApp').controller('flickrPhotosCon',
 	  		flickrSearchService.search({tags: $scope.tags, page: $scope.page})
 	  			.success(function(response){
 	  				//console.log(response);
-
-	  				$scope.page = $scope.page+1;
+	  				$scope.status = response.stat;
+	  				$scope.page = response.photos.page + 1;
 	  				pushPhotos(response.photos.photo);
 
 	  				endLoading();
+	  			}).error(function(response){
+	  				$scope.status = response.stat;
 	  			});	
 	  	};
 
@@ -78,5 +82,13 @@ angular.module('flickrApp').controller('flickrPhotosCon',
 				$scope.searchByTags();
 			}
 		});
+
+		/* auto binding works fine, no need to watch
+		$scope.$watch(function(scope){
+			console.log(scope.smalldevice);
+			return scope.smalldevice;
+		}, function(newValue, oldValue){
+			console.log(newValue);
+		});*/
 	  	
 }]);

@@ -17,11 +17,6 @@
   </div> 
 </div>
 
-<!--div class="black-background center-text row">
-  <div class="photo-block photo-block-{{smallWindow ? 'small' : 'big'}} white-text"  ng-repeat="photo in photos">
-    <p>Loading...</p>
-    <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>
-  </div>
-</div-->
-<flickr-photos tags="tags" ></flickr-photos>
+<!--Photo query & rendering directive-->
+<flickr-photos tags="tags" smalldevice="smallWindow"></flickr-photos>
 

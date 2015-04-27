@@ -3,9 +3,14 @@
   <h4 class="white-text center-text">Please input the tag you wish to search.</h4>
 </div>
 
+<div class="row" ng-show="status != 'ok'">
+	<h4 class="white-text center-text">Sorry, we are facing an error retrieving your request photo.</h4>
+	<p>Return status: {{status}}</p>
+</div>
+
 <!--Images stack area-->
 <div class="black-background center-text row">
-  <div class="photo-block photo-block-{{smallWindow ? 'small' : 'big'}} white-text"  ng-repeat="photo in photos">
+  <div class="photo-block photo-block-{{smalldevice ? 'small' : 'big'}} white-text"  ng-repeat="photo in photos">
     <p>Loading...</p>
     <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>
   </div>
