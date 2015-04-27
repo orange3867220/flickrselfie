@@ -11,14 +11,16 @@ angular.module('flickrselfieApp')
   .controller('MainCtrl', ['$scope', '$routeParams', '$timeout', '$location', 'flickrSearchService', 
   	function ($scope, $routeParams, $timeout, $location, flickrSearchService) {
 
-  		//
-  		// Set up scope variables
-  		//
-  		$scope.loading = false;
-  		$scope.page = 1;
-  		$scope.photos = [];
+  	//
+  	// Set up scope variables
+  	//
+  	$scope.loading = false;
+  	$scope.page = 1;
+  	$scope.photos = [];
 
-  		//
+    $scope.predicts = predictTags;
+
+  	//
 		// Private function to detect window size
 		//
 		var isSmallDevice = function(){
@@ -86,7 +88,7 @@ angular.module('flickrselfieApp')
     // By passing to url to add to history stack for browser back & forward
   	//
   	$scope.realSearch = function(){
-  		$location.path('/'+$scope.tags);
+  		$location.path('/'+$scope.tags.replace(/ /g, ''));
   	};
 
   	//
@@ -104,18 +106,40 @@ angular.module('flickrselfieApp')
 		//
 		angular.element('#search-input').keyup(function(e){
 			// Replace by triggerig button click due to slow reaction
-			if (e.keyCode === 13) {
+			if (e.keyCode === 13 && !$scope.loading) {
         angular.element('#search-button').trigger('click');
 			}
 		});
 
-		//
-		// Bind enter click for select all, improve UX
-		//
-		angular.element('#search-input').click(function(e){
-      console.log('triggered search select all');
-			this.setSelectionRange(0, this.value.length);
-		});
+    //
+    // Bind enter click for select all, improve UX
+    //
+    angular.element('#search-input').click(function(e){
+      this.setSelectionRange(0, this.value.length);
+    });
+
+    //
+    // Last word match for detection
+    //
+    $scope.matchLastWord = function (actual, expected) {
+      var n = expected.lastIndexOf(',');
+      var word = (n === -1) ? (expected + '') : expected.substring(n+1).replace(/ /g, '');
+
+      if(word.length === 0)
+        return false;
+
+      return actual.toLowerCase().indexOf(word.toLowerCase()) === 0;
+    };
+    //
+    // Auto fill selected word into search bar
+    //
+    $scope.autoFill = function(predict){
+      //console.log(predict);
+      var n = $scope.tags.lastIndexOf(',');
+      $scope.tags = (n === -1) ? (predict+', ') : ($scope.tags.substring(0, n+1) + ' ' + predict + ', ');
+
+      angular.element('#search-input').focus();
+    };
 
 		//
 		// Functions to detect window resize 

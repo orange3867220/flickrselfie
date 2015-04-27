@@ -28,10 +28,12 @@
   			for (var key in params) {
   				if (params.hasOwnProperty(key)) {
   					var tar = params[key];
-  					url += '&' + key + '=' + ( angular.isArray(tar) ? tar.join(',') : tar );
+
+  					url += '&' + key + '=' + ( angular.isArray(tar) ? tar.join(',').replace(/ /g, ',') : (angular.isString(tar)?tar.replace(/ /g, ''):tar) );
   				}
   			}
 
+        //console.log(url);
   			return url;
   		};
 
@@ -40,7 +42,7 @@
   		//
   		this.search = function(params){
   			var url = this.parseSearchUrl(params);
-        console.log(url);
+        
   			return $http.get(url)
   			 .success(function(data, status, headers, config){
   				  console.log(data);

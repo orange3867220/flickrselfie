@@ -2,10 +2,18 @@
 <div class="header row">
   <h3 class="col-xs-12 col-sm-3 text-muted white-text center-text" style="margin-bottom:0;">flickrselfie</h3>    
 
+  <!--Search Field-->
   <div class="col-xs-12 col-sm-offset-5 col-sm-4 center-text" style="margin-top:20px; margin-bottom:10px">
-    <input id="search-input" class="align-right" type="text" ng-model="tags" />
-    <!--button class="btn btn-success" ng-click="clearPrevious(); searchByTags();">Search</button-->
-    <button id="search-button" class="btn btn-success" ng-click="realSearch();">Search</button>  
+    <!--Input Field with pop list prediction-->
+    <div style="display:inline-block;">
+      <input id="search-input" class="align-right" type="text" ng-model="tags" placeholder="Search Tags" autocomplete="on"/>
+      <div class="list-group" style="position:absolute;">
+        <a class="list-group-item" ng-repeat="predict in predicts | filter: tags: matchLastWord" ng-click="autoFill(predict);">{{predict}}</a>
+      </div>
+    </div>
+
+    <!--Search Button-->
+    <button id="search-button" class="btn btn-success" ng-click="realSearch();" ng-disabled="loading">Search</button>  
   </div> 
 </div>
 
