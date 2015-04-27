@@ -1,23 +1,22 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+<!--Header logo and search area-->
+<div class="header row">
+  <h3 class="col-xs-12 col-sm-3 text-muted white-text center-text" style="margin-bottom:0;">flickrselfie</h3>    
+
+  <!--Search Field-->
+  <div class="col-xs-12 col-sm-offset-5 col-sm-4 center-text" style="margin-top:20px; margin-bottom:10px">
+    <!--Input Field with pop list prediction-->
+    <div style="display:inline-block;">
+      <input id="search-input" class="align-right" type="text" ng-model="tags" placeholder="Search Tags" autocomplete="on"/>
+      <div class="list-group" style="position:absolute; z-index:100;">
+        <a class="list-group-item" ng-repeat="predict in predicts | filter: tags: matchLastWord" ng-click="autoFill(predict);">{{predict}}</a>
+      </div>
+    </div>
+
+    <!--Search Button-->
+    <button id="search-button" class="btn btn-success" ng-click="realSearch();" ng-disabled="loading">Search</button>  
+  </div> 
 </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+<!--Photo query & rendering directive-->
+<flickr-photos tags="tags" smalldevice="smallWindow"></flickr-photos>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>

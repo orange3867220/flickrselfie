@@ -4,76 +4,112 @@ body {
   padding-bottom: 20px;
 }
 
+/*global reuse setup*/
+.black-background{
+  background: #000000;
+}
+.white-text{
+  color: #FFFFFF;
+}
+.center-text{
+  text-align:center;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
 .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 0;
+  padding-right: 0;
 }
-
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #DDDDDD;
 }
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
-
 /* Custom page footer */
 .footer {
   padding-top: 19px;
   color: #777;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #DDDDDD;
 }
-
-/* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-}
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
   .header,
   .marketing,
   .footer {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
   }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+}
+
+/* Photo block*/
+.photo-block{
+  display: inline-block;
+  border: 1px solid #FFFFFF;
+  position: relative;
+}
+.photo-block p{
+  position: absolute; 
+  top: 50%;
+  left: 50%;
+  margin-top: -10px;
+  margin-left: -31px;
+  /*z-index: -1;*/
+}
+.photo-block img{
+  position: relative;
+  z-index: 2;
+}
+.photo-block-small{
+  width: 77px;
+  height: 77px;
+  margin: 5px;
+}
+.photo-block-small img{
+  width: 75px;
+  height: 75px;
+}
+.photo-block-big{
+  width: 152px;
+  height: 152px;
+  margin: 10px;
+}
+.photo-block-big img{
+  width: 150px;
+  height: 150px;
+}
+/*Spinner rotate*/
+.loading-block{
+  color: #DDDDDD; 
+  font-size: 50px;
+  text-align: center;
+}
+.glyphicon-refresh-animate {
+    -animation: spin .8s infinite linear;
+    -webkit-animation: spin2 .8s infinite linear;
+    -moz-animation: spin3 .8s infinite linear;
+    -ms-animation: spin4 .8s infinite linear;
+    -o-animation: spin5 .8s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+@-ms-keyframes spin4 {
+    from { -ms-transform: rotate(0deg);}
+    to { -ms-transform: rotate(360deg);}
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: scale(1) rotate(0deg); transform: scale(1) rotate(0deg);}
+    to { -webkit-transform: scale(1) rotate(360deg); transform: scale(1) rotate(360deg);}
+}
+@keyframes spin {
+    from { -webkit-transform: scale(1) rotate(0deg); transform: scale(1) rotate(0deg);}
+    to { -webkit-transform: scale(1) rotate(360deg); transform: scale(1) rotate(360deg);}
 }
