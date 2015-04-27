@@ -1,24 +1,27 @@
-<div class="header">
-  <div class="col-md-4 pull-right">
+<!--Header logo and search area-->
+<div class="header row">
+  <h3 class="col-xs-12 col-sm-3 text-muted white-text center-text" style="margin-bottom:0;">flickrselfie</h3>    
+
+  <div class="col-xs-12 col-sm-offset-5 col-sm-4 center-text" style="margin-top:20px; margin-bottom:10px">
     <input id="search-input" class="align-right" type="text" ng-model="tags" />
     <button class="btn btn-success" ng-click="clearPrevious(); searchByTags();">Search</button>
-  </div>
-
-  <h3 class="text-muted logo white-text">flickrselfie</h3>
-        
+  </div> 
 </div>
 
-<div class="" ng-hide="loading || photos.length > 0">
+<!--Help message for first open-->
+<div class="row" ng-hide="loading || photos.length > 0">
   <h4 class="white-text center-text">Please input the tag you wish to search.</h4>
 </div>
 
-<div class="black-background center-text">
+<!--Images stack area-->
+<div class="black-background center-text row">
   <div class="photo-block photo-block-{{smallWindow ? 'small' : 'big'}} white-text"  ng-repeat="photo in photos">
     <p>Loading...</p>
     <img src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>
   </div>
 </div>
 
-<div class="loading-block black-background" ng-show="loading">
+<!--Loading suggestion image-->
+<div class="loading-block black-background row" ng-show="loading">
   <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" style=""></span>
 </div>

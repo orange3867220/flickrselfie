@@ -22,31 +22,16 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
-
 /* Custom page header */
 .header {
   border-bottom: 1px solid #DDDDDD;
 }
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
-
 /* Custom page footer */
 .footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #DDDDDD;
 }
-
-/* Customize container */
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
@@ -65,7 +50,6 @@ body {
 /* Photo block*/
 .photo-block{
   display: inline-block;
-  margin: 10px;
   border: 1px solid #FFFFFF;
   position: relative;
 }
@@ -84,6 +68,7 @@ body {
 .photo-block-small{
   width: 77px;
   height: 77px;
+  margin: 5px;
 }
 .photo-block-small img{
   width: 75px;
@@ -92,6 +77,7 @@ body {
 .photo-block-big{
   width: 152px;
   height: 152px;
+  margin: 10px;
 }
 .photo-block-big img{
   width: 150px;
