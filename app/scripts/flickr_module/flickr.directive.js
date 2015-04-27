@@ -11,7 +11,7 @@ angular.module('flickrApp').directive('flickrPhotos', function() {
 		},
 
 		controller: 'flickrPhotosCon',
-    	templateUrl: '/scripts/flickr_module/flickr.template.html'
+    	templateUrl: 'views/flickr.template.html'
 	};
 });
 
