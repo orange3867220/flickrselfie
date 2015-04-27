@@ -7,7 +7,7 @@
     <!--Input Field with pop list prediction-->
     <div style="display:inline-block;">
       <input id="search-input" class="align-right" type="text" ng-model="tags" placeholder="Search Tags" autocomplete="on"/>
-      <div class="list-group" style="position:absolute;">
+      <div class="list-group" style="position:absolute; z-index:100;">
         <a class="list-group-item" ng-repeat="predict in predicts | filter: tags: matchLastWord" ng-click="autoFill(predict);">{{predict}}</a>
       </div>
     </div>
@@ -17,20 +17,11 @@
   </div> 
 </div>
 
-<!--Help message for first open-->
-<div class="row" ng-hide="loading || photos.length > 0">
-  <h4 class="white-text center-text">Please input the tag you wish to search.</h4>
-</div>
-
-<!--Images stack area-->
-<div class="black-background center-text row">
+<!--div class="black-background center-text row">
   <div class="photo-block photo-block-{{smallWindow ? 'small' : 'big'}} white-text"  ng-repeat="photo in photos">
     <p>Loading...</p>
     <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>
   </div>
-</div>
+</div-->
+<flickr-photos tags="tags" ></flickr-photos>
 
-<!--Loading suggestion image-->
-<div class="loading-block black-background row" ng-show="loading">
-  <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" style=""></span>
-</div>

@@ -8,16 +8,12 @@
  * Controller of the flickrselfieApp
  */
 angular.module('flickrselfieApp')
-  .controller('MainCtrl', ['$scope', '$routeParams', '$timeout', '$location', 'flickrSearchService', 
-  	function ($scope, $routeParams, $timeout, $location, flickrSearchService) {
+  .controller('MainCtrl', ['$scope', '$routeParams', '$timeout', '$location', 
+  	function ($scope, $routeParams, $timeout, $location) {
 
   	//
   	// Set up scope variables
   	//
-  	$scope.loading = false;
-  	$scope.page = 1;
-  	$scope.photos = [];
-
     $scope.predicts = predictTags;
 
   	//
@@ -31,54 +27,11 @@ angular.module('flickrselfieApp')
 		};
 		$scope.smallWindow = isSmallDevice();
 
-  	//
-  	// Private function to start & end loading
-  	//
-  	var startLoading = function(){
-  		$scope.loading = true;
-  	};
-  	var endLoading = function(){
-  		$scope.loading = false;
-		}; 
-
-  	//
-  	// Private function to manipute photos in scope
-  	//
-  	var pushPhotos = function(photos){
-  		for(var i in photos){
-  			$scope.photos.push(photos[i]);
-  		}
-  	};
-
-  	//
-  	// Function to clear previous search details
-  	//
-  	$scope.clearPrevious = function(){
-  		$scope.photos = [];
-  		$scope.page = 1;
-  	};
-
-  	//
-  	// Function to do search
-  	//
-  	$scope.searchByTags = function(){
-  		startLoading();
-
-  		flickrSearchService.search({tags: $scope.tags, page: $scope.page})
-  			.success(function(response){
-  				//console.log(response);
-
-  				$scope.page = $scope.page+1;
-  				pushPhotos(response.photos.photo);
-
-  				endLoading();
-  			});	
-  	};
 
   	// Get tags from parameters and start searching by tags
   	if(angular.isDefined($routeParams.tags)){
   		$scope.tags = $routeParams.tags;
-  		$scope.searchByTags();
+  		//$scope.searchByTags();
   	}else{
   		$scope.tags = '';
   	}
@@ -90,16 +43,6 @@ angular.module('flickrselfieApp')
   	$scope.realSearch = function(){
   		$location.path('/'+$scope.tags.replace(/ /g, ''));
   	};
-
-  	//
-  	// Infinite scroll, when reach end of page, load more page
-  	//
-		angular.element(window).scroll(function() {
-			if(angular.element(window).scrollTop() + angular.element(window).height() === angular.element(document).height()) {
-				$scope.loading = true;
-				$scope.searchByTags();
-			}
-		});
 
 		//
 		// Bind enter click event for quick trigger search
