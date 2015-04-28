@@ -23,7 +23,7 @@ Predict from 100 most popular searching tags and provide selection.
 
 =========================================================================
 
-After restore bower and npm dependencies,
+After restore bower and npm dependencies.
 Use **grunt serve** to see development build.
 Use **grunt test** to see test result.
 Use **grunt build** to build production version, which will sits in **dist** folder.
